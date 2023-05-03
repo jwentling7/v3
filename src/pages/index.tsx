@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
+import { gql } from "@apollo/client";
+import { client } from "@/graphql/GraphQLProvider";
+import { HomePageQuery } from "@/graphql/graphql";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Manrope({ subsets: ["latin"] });
 
-export default function Home() {
+const Home = ({ data }: { data: HomePageQuery }) => {
+  console.log("hi", data);
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -107,4 +113,24 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+const HOME_PAGE_QUERY = gql`
+  query HomePage {
+    authors {
+      name
+    }
+  }
+`;
+
+export const getStaticProps = async () => {
+  const { data } = await client.query<HomePageQuery>({
+    query: HOME_PAGE_QUERY,
+  });
+
+  return {
+    props: { data },
+  };
+};
+
+export default Home;
