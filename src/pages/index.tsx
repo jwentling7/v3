@@ -115,10 +115,19 @@ const Home = ({ data }: { data: HomePageQuery }) => {
   );
 };
 
+// Better way to store this information?
 const HOME_PAGE_QUERY = gql`
   query HomePage {
-    authors {
+    webPage(where: { name: "Home" }) {
       name
+      header
+      description
+      webPageSections {
+        header
+        description
+        name
+        subHeader
+      }
     }
   }
 `;
