@@ -1,8 +1,5 @@
 import Link from "next/link";
 import { ReactNode } from "react";
-import Image from "next/image";
-import DoubleRightArrow from "@/icons/double_right_arrow.svg";
-import RightArrow from "@/icons/right_arrow.svg";
 
 type ButtonProps = {
   children: ReactNode;
@@ -18,10 +15,10 @@ const Button = ({
   variant = "outlined",
 }: ButtonProps) => {
   const className = {
-    base: "relative flex gap-4 items-center rounded px-5 py-2 transition duration-500 group",
+    base: "relative flex items-center rounded px-6 py-2 transition duration-300 group",
     outlined:
       "text-pink-500 border border-pink-500 hover:bg-pink-500 hover:text-black-500",
-    text: "hover:text-opacity-50",
+    text: "hover:opacity-50",
   };
 
   const classNames = `${className.base} ${className[variant]}`;
@@ -30,14 +27,28 @@ const Button = ({
     <>
       {children}
       {variant === "text" && (
-        <>
-          <Image
-            src={RightArrow}
-            alt="right arrow"
-            className="absolute right-0 transition duration-300 group-hover:opacity-0"
-          />
-          {/* <Image src={DoubleRightArrow} className="absolute right-0 transition duration-300 opacity-0 group-hover:opacity-100"/> */}
-        </>
+        /**
+         * Took this SVG style from Stripe's website.
+         * @link https://stripe.com/
+         */
+        <svg
+          className="ml-3 stroke-white-500 stroke-2"
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          aria-hidden="true"
+        >
+          <g fill-rule="evenodd">
+            <path
+              className="duration-300 opacity-0 group-hover:opacity-100"
+              d="M0 5h7"
+            ></path>
+            <path
+              className="duration-300 group-hover:translate-x-1"
+              d="M1 1l4 4-4 4"
+            ></path>
+          </g>
+        </svg>
       )}
     </>
   );

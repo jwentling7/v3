@@ -15,7 +15,7 @@ const Home = async () => {
       <Section>
         <h1>{data.webPage?.header}</h1>
         <p>{data.webPage?.description}</p>
-        <div className="flex gap-12">
+        <div className="flex">
           <ResumeButton />
           <Button href="#contact" variant="text">
             Contact
